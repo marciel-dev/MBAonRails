@@ -1,13 +1,13 @@
-class HtmlBuilder
+class HtmlBuilder2
   def initialize(&block)
     @html = ""
     instance_eval(&block) if block_given?
   end
 
-  def div(content = nil, &block)
+  def div(content= nil, &block)
     @html << "<div>"
     if block_given?
-      instance_eval(&block)
+      block.call
     else
       @html << content.to_s
     end
@@ -17,7 +17,7 @@ class HtmlBuilder
   def span(content = nil, &block)
     @html << "<span>"
     if block_given?
-      instance_eval(&block)
+      block.call
     else
       @html << content.to_s
     end
@@ -29,7 +29,7 @@ class HtmlBuilder
   end
 end
 
-builder = HtmlBuilder.new do
+builder = HtmlBuilder2.new do
   div do
     div "Conteúdo em div"
     span "Nota em div"
